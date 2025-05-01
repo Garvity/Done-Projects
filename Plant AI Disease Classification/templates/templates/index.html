@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>LeafLogic - Plant Disease Detection</title>
+</head>
+<body>
+
+    <!-- GIF Background -->
+    <div class="background-gif"></div>
+
+    <!-- LeafLogic Logo -->
+    <div class="leaflogic-container">
+        <img src="{{ url_for('static', filename='leaf-banner.png') }}" alt="Logo" class="profile-picture">
+        <div class="leaflogic-text">LeafLogic</div>
+    </div>
+
+    <!-- Menu Button -->
+    <button id="menu-btn">☰</button>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <ul>
+            <li><a href="/">HOME</a></li>
+            <li><a href="/common_diseases">Common Diseases</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/features">Features</a></li>
+            <li><a href="/how_it_works">How It Works</a></li>
+            <li><a href="/faq">FAQs</a></li>
+        </ul>
+    </div>
+
+    <!-- Plant Images in Row -->
+    <div class="plant-images-row">
+        <img src="{{ url_for('static', filename='disease_plant.jpg') }}" alt="Plant Image 1" class="plant-image">
+        <img src="{{ url_for('static', filename='plant__.jpg') }}" alt="Plant Image 2" class="plant-image">
+    </div>
+
+    <!-- Centered Text -->
+    <div class="center-text">
+        <h1>Wondering what’s affecting your plant?</h1>
+        <p>Let us help!</p>
+        <a href="{{ url_for('detect') }}" class="get-started-button">Get Started</a>
+    </div>
+
+    <script>
+        document.getElementById('menu-btn').addEventListener('click', function() {
+        const sidebar = document.querySelector('.sidebar');
+        sidebar.classList.toggle('active'); // Toggles the sidebar visibility
+    });
+    </script>
+
+</body>
+</html>
