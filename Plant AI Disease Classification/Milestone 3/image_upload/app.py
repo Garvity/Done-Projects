@@ -1,0 +1,144 @@
+from flask import Flask, request, render_template, redirect, url_for
+import os
+import tensorflow as tf
+import numpy as np
+import cv2
+from skimage.feature import local_binary_pattern
+from skimage.color import rgb2gray
+from werkzeug.utils import secure_filename
+
+# Initialize Flask app
+app = Flask(__name__)
+
+# Configuration
+UPLOAD_FOLDER = 'static/upload/'
+MODEL_PATH = 'C:/Users/DELL/Documents/GitHub/PlantAI-Automated-Plant-Disease-Detection-using-AI-Vision-Algorithm_December_2024/Milestone 3/image_upload/models/sashanksModel20epochhhha.h5'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+
+# Ensure upload folder exists
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
+
+# Load the model
+model = tf.keras.models.load_model(MODEL_PATH)
+
+# Class names (Ensure it matches the model's output order)
+CLASS_NAMES = [
+    "Bacterial Blight (CBB)", "Brown Streak Disease (CBSD)", "Green Mottle (CGM)", "Healthy",
+    "Mosaic Disease (CMD)", "Rice_BrownSpot", "Rice_Healthy", "Rice_Hispa", "Rice_LeafBlast",
+    "apple_apple scab", "apple_healthy", "bacterial spot", "black rot", "cedar apple rust",
+    "cherry (including sour)_healthy", "cherry (including sour)_powdery mildew", "corn (maize)",
+    "corn (maize)_cercospora leaf spot gray leaf spot", "corn (maize)_common rust", "corn (maize)_healthy",
+    "corn (maize)_northern leaf blight", "early blight", "grape", "grape_black rot",
+    "grape_esca (black measles)", "grape_healthy", "grape_leaf blight (isariopsis leaf spot)",
+    "healthy", "healthy_healthy", "late blight", "orange", "orange_haunglongbing (citrus greening)",
+    "peach", "peach_bacterial spot", "peach_healthy", "pepper, bell", "squash_powdery mildew",
+    "strawberry_healthy", "strawberry_leaf scorch", "tomato_bacterial spot", "tomato_early blight",
+    "tomato_healthy", "tomato_late blight", "tomato_leaf mold", "tomato_septoria leaf spot",
+    "tomato_spider mites two-spotted spider mite", "tomato_target spot", "tomato_tomato mosaic virus",
+    "tomato_tomato yellow leaf curl virus"
+]
+
+# Helper function to check if the uploaded file is allowed
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+# Image preprocessing function
+def preprocess_image(image_path):
+    image = cv2.imread(image_path)
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    image = tf.image.resize(image, [128, 128]) / 255.0
+    return np.expand_dims(image, axis=0)
+
+# Segment leaf function
+def segment_leaf(image):
+    gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
+    blurred = cv2.GaussianBlur(gray, (5, 5), 0)
+    _, thresh = cv2.threshold(blurred, 120, 255, cv2.THRESH_BINARY)
+    contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    mask = np.zeros_like(gray)
+    cv2.drawContours(mask, contours, -1, (255), thickness=cv2.FILLED)
+    return cv2.bitwise_and(image, image, mask=mask)
+
+# Extract color features
+def extract_color_features(image):
+    mean_color = np.mean(image, axis=(0, 1))
+    std_color = np.std(image, axis=(0, 1))
+    return mean_color, std_color
+
+# Extract texture features using LBP
+def extract_texture_features(image):
+    gray_image = rgb2gray(image)
+    lbp = local_binary_pattern(gray_image, P=8, R=1, method='uniform')
+    return np.histogram(lbp.ravel(), bins=np.arange(0, 59), range=(0, 58), density=True)[0]
+
+# Extract shape features
+def extract_shape_features(image):
+    gray_image = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
+    _, thresh = cv2.threshold(gray_image, 120, 255, cv2.THRESH_BINARY)
+    contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    areas = [cv2.contourArea(c) for c in contours]
+    perimeters = [cv2.arcLength(c, True) for c in contours]
+    return np.mean(areas), np.mean(perimeters)
+
+# Combine preprocessing and prediction
+def preprocess_and_predict(image_path):
+    image = cv2.imread(image_path)
+    segmented_image = segment_leaf(image)
+    color_features = extract_color_features(segmented_image)
+    texture_features = extract_texture_features(segmented_image)
+    shape_features = extract_shape_features(segmented_image)
+    all_features = np.concatenate([color_features[0], color_features[1], texture_features, shape_features])
+    processed_image = preprocess_image(image_path)
+    prediction = model.predict(processed_image)
+    predicted_class_index = np.argmax(prediction, axis=1)[0]
+    return predicted_class_index, all_features
+
+# Routes
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    predicted_class = None
+    filename = None
+
+    if request.method == 'POST':
+        file = request.files['file']
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            file.save(file_path)
+            predicted_class_index, features = preprocess_and_predict(file_path)
+            predicted_class = CLASS_NAMES[predicted_class_index]
+
+    return render_template('index.html', predicted_class=predicted_class, filename=filename)
+
+@app.route('/buy-products')
+def buy_products():
+    return render_template('buy-products.html')
+
+@app.route('/Contact_Us')
+def contact_us():
+    return render_template('Contact_Us.html')
+
+@app.route('/Why_PlantAI')
+def why_plantai():
+    return render_template('Why_PlantAI.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/PlantDiseases')
+def plant_diseases():
+    return render_template('PlantDiseases.html')
+
+
+@app.route('/result/<filename>')
+def result(filename):
+    return render_template('upload_success.html', filename=filename)
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
