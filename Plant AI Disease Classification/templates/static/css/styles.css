@@ -1,0 +1,158 @@
+/* General Styling */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background: url('/static/background.gif') no-repeat center center;
+    background-size: cover;
+    overflow: hidden;
+}
+
+/* Background GIF */
+.background-gif {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url('/static/background.gif') no-repeat center center;
+    background-size: cover;
+    z-index: -1;
+}
+
+/* LeafLogic Container */
+.leaflogic-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.profile-picture {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.leaflogic-text {
+    font-size: 2rem;
+    color: #000;
+    font-weight: bold;
+}
+
+/* Menu Button */
+#menu-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    z-index: 1000;
+}
+
+#menu-btn:hover {
+    background-color: #45a049;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #f8f9fa;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    padding-top: 60px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar li {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.2rem;
+}
+
+.sidebar a:hover {
+    color: #007bff;
+}
+
+.sidebar.active {
+    right: 0; /* Moves it into view */
+}
+/* Plant Image Styling */
+.plant-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin: 10px;
+    display: inline-block;
+}
+
+/* Plant Images Row */
+.plant-images-row {
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+}
+
+/* Centered Text */
+.center-text {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+}
+
+.center-text h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.center-text p {
+    font-size: 1.2rem;
+}
+
+/* Get Started Button */
+.get-started-button {
+    padding: 10px 20px;
+    background: #66bb6a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    margin-top: 20px;
+}
+
+.get-started-button:hover {
+    background: #388e3c;
+}

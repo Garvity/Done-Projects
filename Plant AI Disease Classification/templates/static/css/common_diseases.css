@@ -1,0 +1,281 @@
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Header */
+.main-header {
+    background-color: #eaf8eb;
+    color: #4CAF50;
+    border-bottom: 3px solid #4CAF50;
+}
+
+.main-header h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.main-header p {
+    font-size: 1.2rem;
+}
+
+/* Menu Button */
+#menu-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    z-index: 1000;
+}
+
+#menu-btn:hover {
+    background-color: #45a049;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #f8f9fa;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    padding-top: 60px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar li {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.2rem;
+}
+
+.sidebar a:hover {
+    color: #007bff;
+}
+
+.sidebar.active {
+    right: 0; /* Moves it into view */
+}
+
+
+/* Search Bar */
+.search-container {
+    text-align: center;
+    margin: 20px 0;
+    justify-content: center;
+    align-items: center;
+}
+
+#search-bar {
+    width: 100%; /* Makes it responsive */
+    max-width: 1200px; /* Ensures enough width on large screens */
+    min-width: 300px; /* Ensures it's not too small on smaller screens */
+    padding: 12px 20px;
+    font-size: 18px; /* Increased font size for better readability */
+    border: 2px solid #ddd;
+    border-radius: 30px;
+    outline: none;
+    box-sizing: border-box; /* Ensures padding doesn't shrink the input */
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background: linear-gradient(135deg, #f9f9f9, #f1f1f1);
+}
+
+/* Ensure responsiveness */
+@media (max-width: 768px) {
+    #search-bar {
+        max-width: 90%; /* Occupies 90% of the screen width */
+        font-size: 16px; /* Adjust font size on smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    #search-bar {
+        max-width: 100%; /* Full width on very small devices */
+    }
+}
+
+
+#search-bar:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+}
+
+/* LeafLogic Container */
+.leaflogic-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.profile-picture {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.leaflogic-text {
+    font-size: 2rem;
+    color: #000;
+    font-weight: bold;
+}
+
+/* Container */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    gap: 20px;
+}
+
+/* Disease Card */
+.disease-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: calc(33.333% - 40px); /* 3 cards per row on large screens */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.disease-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Disease Image */
+.disease-card img {
+    width: 100%; /* Ensures the image spans the full width of the card */
+    height: 180px; /* Fixed height for uniformity */
+    border-radius: 10px; /* Keeps the rounded corners */
+    object-fit: cover; /* Maintains aspect ratio and avoids distortion */
+    margin-bottom: 15px;
+    object-position: center; /* Centers the content within the image box */
+}
+
+/* Disease Image */
+.card-img-top {
+    width: 100%; /* Ensures the image spans the full width of its container */
+    height: 180px; /* Fixed height for all images */
+    object-fit: cover; /* Maintains aspect ratio, avoids distortion */
+    object-position: center; /* Centers the image within the defined size */
+    border-radius: 10px; /* Optional for rounded corners */
+}
+
+
+/* Disease Title */
+.disease-card h2 {
+    font-size: 1.5rem;
+    color: #4CAF50;
+    margin-bottom: 10px;
+}
+
+/* Disease Description */
+.disease-card p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Responsive Design */
+
+/* Medium screens (Tablets) */
+@media (max-width: 1024px) {
+    .disease-card {
+        width: calc(50% - 40px); /* 2 cards per row */
+    }
+
+    .header {
+        font-size: 2rem;
+        padding: 40px 15px;
+    }
+
+    #search-bar {
+        width: 90%;
+    }
+}
+
+/* Small screens (Mobile) */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .disease-card {
+        width: 90%; /* Full width */
+    }
+
+    .leaflogic-container {
+        position: static;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .profile-picture {
+        width: 40px;
+        height: 40px;
+    }
+
+    .leaflogic-text {
+        font-size: 1.2rem;
+    }
+
+    .header {
+        font-size: 1.8rem;
+        padding: 30px 10px;
+    }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+    .header {
+        font-size: 1.5rem;
+    }
+
+    #search-bar {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .disease-card h2 {
+        font-size: 1.3rem;
+    }
+
+    .disease-card p {
+        font-size: 0.9rem;
+    }
+}

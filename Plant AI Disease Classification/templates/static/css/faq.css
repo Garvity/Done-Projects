@@ -1,0 +1,133 @@
+/* Header Section */
+.main-header {
+    background-color: #eaf8eb;
+    color: #4CAF50;
+    border-bottom: 3px solid #4CAF50;
+}
+
+.main-header h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.main-header p {
+    font-size: 1.2rem;
+}
+
+/* Menu Button */
+#menu-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    z-index: 1000;
+}
+
+#menu-btn:hover {
+    background-color: #45a049;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #f8f9fa;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    padding-top: 60px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar li {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.2rem;
+}
+
+.sidebar a:hover {
+    color: #007bff;
+}
+
+.sidebar.active {
+    right: 0; /* Moves it into view */
+}
+
+/* LeafLogic Container */
+.leaflogic-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.profile-picture {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.leaflogic-text {
+    font-size: 2rem;
+    color: #000;
+    font-weight: bold;
+}
+
+/* Accordion Styling */
+.accordion-button {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+}
+
+.accordion-button:focus {
+    border-color: #4CAF50;
+    box-shadow: none;
+}
+
+.accordion-body {
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+.accordion-item {
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+}
+
+.accordion-item:last-child {
+    margin-bottom: 0;
+}
+
+.accordion-header {
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #5aaf5a;
+}

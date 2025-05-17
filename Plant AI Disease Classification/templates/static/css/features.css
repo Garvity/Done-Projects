@@ -1,0 +1,179 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Custom CSS */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    line-height: 1.6;
+    padding: 0;
+}
+
+/* LeafLogic Container */
+.leaflogic-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.profile-picture {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.leaflogic-text {
+    font-size: 2rem;
+    color: #000;
+    font-weight: bold;
+}
+
+/* Menu Button */
+#menu-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    z-index: 1000;
+}
+
+#menu-btn:hover {
+    background-color: #45a049;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #f8f9fa;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    padding-top: 60px;
+    align-items: center; /* Horizontally center the content */
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar li {
+    margin: 10px 0; /* Reduced margin for closer spacing */
+    width: 100%; /* Make sure li takes up the full width */
+    display: flex;
+    justify-content: center; /* Center the text inside the li */
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.2rem;
+}
+
+.sidebar a:hover {
+    color: #007bff;
+}
+
+.sidebar.active {
+    right: 0; /* Moves it into view */
+}
+
+/* Header */
+.main-header {
+    background-color: #eaf8eb;
+    color: #4CAF50;
+    border-bottom: 3px solid #4CAF50;
+}
+
+.main-header h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.main-header p {
+    font-size: 1.2rem;
+}
+
+/* Features Section */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    background-color: transparent; /* Remove card-like background */
+    border-radius: 0; /* No rounded corners */
+    padding: 0.5rem 0; /* Adjust padding */
+    box-shadow: none; /* Remove shadow */
+}
+
+ul li i {
+    font-size: 2.5rem;
+    color: #007bff;
+}
+
+ul li div {
+    flex-grow: 1;
+}
+
+ul li h5 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0.5rem 0;
+}
+
+ul li p {
+    color: #6c757d;
+}
+
+/* Layout for Image and Features */
+.feature-image img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.feature-list {
+    padding-left: 1.5rem;
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+    .row {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .feature-list {
+        padding-left: 0;
+        text-align: center;
+    }
+
+    .feature-image {
+        margin-bottom: 1.5rem;
+    }
+}
