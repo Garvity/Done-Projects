@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Automated Plant Disease Detection - Upload an image of a plant leaf to detect potential diseases.">
+    <meta name="keywords" content="plant disease detection, plant health, agriculture, AI">
+    <meta name="author" content="Your Name or Organization">
+    <title>Automated Plant Disease Detection</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts for Roboto -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- External CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+ body {
+    font-family: 'Times New Roman', Times, serif;
+    background-color: #f4f7f6;
+    min-height: 100vh;
+    color: #333;
+    background-image: url("https://img.freepik.com/premium-photo/corners-with-leaves-green-background-with-space-text_887552-45707.jpg");
+    background-size: cover; /* Ensures the background covers the viewport without stretching */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed; /* Keeps the background fixed during scrolling */
+    padding-top: 60px;
+    display: flex;
+    flex-direction: column;
+}
+
+.diversity {
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;
+}
+
+    </style>
+</head>
+<body>
+    <img src="{{ url_for('static', filename='/img.jpeg') }}" class="card-img-top" alt="Pesticide 1">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="{{ url_for('index') }}" style="padding-bottom: 5px;">
+                <img src="{{ url_for('static', filename='logofinal.jpg') }}" alt="Logo" style="height: 50px; margin-right: 20px;" class="d-inline-block">
+                <span style="color: #ffffff; font-family: 'Roboto', sans-serif; font-size: 30px; line-height: 1.1; margin-top: 10px;text-shadow: 1px 1px 0 #228B22, -1px -1px 0 #228B22, 1px -1px 0 #228B22, -1px 1px 0 #228B22;" >Leaf</span>
+                <span style="color: #7DB246; font-family: 'Roboto', sans-serif; font-size: 30px; line-height: 1.1; margin-top: 10px;text-shadow: 1px 1px 0 #228B22, -1px -1px 0 #228B22, 1px -1px 0 #228B22, -1px 1px 0 #228B22" >Cure</span>
+              </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('buy_products') }}">Buy Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('about') }}">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('why_plantai') }}">Why Plant AI</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('plant_diseases') }}">Plant Diseases</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('contact_us') }}">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5 main-content">
+        <h2>Automated Plant Disease Detection</h2>
+        <div class="container container-fluid">
+            <div class="row p-3">
+                    <div class=" p-5 bg-white shadow rounded-lg" style="height: 95%;">
+                        <h5><b>Our Mission</b></h5>
+                        <p>Our mission is to leverage the power of artificial intelligence and machine learning to revolutionize the agricultural sector. By providing a robust solution to identify and classify plant diseases accurately, we aim to empower farmers, gardeners, and agricultural experts with tools to enhance crop health, minimize losses, and promote sustainable farming practices.
+                        </p>
+                    </div>
+                </div>
+                <div class="row p-3">
+                    
+                        <div class=" p-5 bg-white shadow rounded-lg" style="height: 95%;">
+                  
+                            <h5><b>Our Vision</b></h5>
+                            <p>We envision a world where technology bridges the gap between agricultural challenges and innovative solutions, fostering a healthier, more resilient ecosystem for plants and communities.  
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row p-3">
+                            <div class=" p-5 bg-white shadow rounded-lg" style="height: 95%;">
+                      
+                                <h5><b>Our Project</b></h5>
+                                <p>This project is a cutting-edge AI initiative focused on predicting and classifying plant diseases using machine learning algorithms. By analyzing patterns in plant images, our model can detect diseases with high precision, providing actionable insights to mitigate the spread of infections. 
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row p-3">
+                            
+                                <div class=" p-5 bg-white shadow rounded-lg" style="height: 95%;">
+                          
+                                    <h5><b>Core Values</b></h5>
+                                    <p><ul>
+                                        <li><b>⁠Innovation:</b>Pioneering advanced AI techniques to address real-world agricultural challenges. </li>
+                                        <li><b>Sustainability:</b>Promoting practices that ensure long-term environmental health. </li>
+                                        <li><b>Empowerment:</b>Equipping individuals and organizations with accessible tools for informed decision-making. </li>
+                                        <li><b>Accuracy:</b>Delivering reliable and precise disease detection for timely interventions. </li>
+                                        </ul>
+                                    </p>
+        
+            
+                                    </div>
+                                </div>
+                            </div>
+        
+
+        
+        
+        <div class="card mx-auto mt-4" style="max-width: 500px; padding-bottom: 30px; margin-bottom: 40px;">
+            <div class="card-body">
+                <h1 class="text-center">Upload an Image</h1>
+                <form id="upload-form" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="file" class="form-label">Select an image of a plant leaf:</label>
+                        <input type="file" name="file" id="file" accept="image/*" class="form-control" required onchange="previewImage(event)">
+                    </div>
+                    <img id="preview" alt="Preview of the selected image" class="img-fluid mt-3" style="max-width: 100%;">
+                    <button type="submit" class="btn btn-success w-100 mt-3">Analyze Image</button>
+                </form>
+
+                <!-- Prediction Result -->
+                <div id="prediction-result" class="mt-4" style="display:none;">
+                    <h3>Prediction Result</h3>
+                    <p id="predicted-class"></p>
+                    <p id="confidence-score"></p>
+                    <img id="predicted-image" src="" alt="Predicted Image" class="img-fluid mt-3" style="max-width: 100%;">
+
+                    <!-- Get Disease Diversity Button -->
+                    <button id="getDiseaseDiversity" class="btn btn-info w-100 mt-3">Get Disease Diversity</button>
+                    <button id="UploadAnotherImage" class="btn btn-info w-100 mt-3">Upload Another Image</button>
+                    <!-- Displaying the disease diversity classification -->
+                    <div id="diversityResult" class="diversity" style="display:none;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Plant Disease Detection. All Rights Reserved.</p>
+        <p>Powered by AI technology to support sustainable agriculture.</p>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Support</a>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- External JS -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
+
+    <script>
+        // Image preview function
+        function previewImage(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = function() {
+                const preview = document.getElementById('preview');
+                preview.src = reader.result;
+            }
+            reader.readAsDataURL(file);
+        }
+
+        // Handle form submission and AJAX request
+        document.getElementById("upload-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const formData = new FormData();
+            formData.append("file", document.getElementById("file").files[0]);
+
+            fetch("/", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Display prediction result
+                const resultSection = document.getElementById("prediction-result");
+                resultSection.style.display = "block";
+                
+                // Set predicted class
+             // Set predicted class
+document.getElementById("predicted-class").textContent = `Predicted Class: ${data.predicted_class}`;
+
+// Set confidence score
+const confidenceText = `Confidence Score: ${data.confidence}`;
+document.getElementById("confidence-score").textContent = confidenceText;
+
+
+                // Set image URL
+                document.getElementById("predicted-image").src = data.image_url;
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+        });
+
+      
+      
+        // Handle Get Disease Diversity button click
+        document.getElementById('getDiseaseDiversity').addEventListener('click', function () {
+    const confidenceText = document.getElementById("confidence-score").textContent;
+    const confidenceScore = parseFloat(confidenceText.split(": ")[1]);
+
+    // Assuming disease name is in the 'predicted-class' element
+    const diseaseName = document.getElementById('predicted-class').textContent.trim();
+    
+    if (!confidenceScore || !diseaseName) {
+        alert('Invalid confidence score or disease name.');
+        return;
+    }
+
+    // Log disease name and confidence score
+    console.log('Disease Name:', diseaseName);
+    console.log('Confidence Score:', confidenceScore);
+
+    // Display loading text while fetching data
+    const detailsDiv = document.createElement('div');
+    detailsDiv.classList.add('loading-details');
+    detailsDiv.style.backgroundColor = "#f8f9fa";
+    detailsDiv.style.padding = "15px";
+    detailsDiv.style.marginTop = "20px";
+    detailsDiv.style.borderRadius = "5px";
+    detailsDiv.textContent = "Loading disease details...";
+    document.getElementById('prediction-result').appendChild(detailsDiv);
+
+    // Fetch disease details from Gemini API
+    fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyCxAPLuwEEbnObumhwyya6ReF0JUzu4fkU", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            contents: [
+                {
+                    parts: [
+                        {
+                            text: `Provide details about the predicted disease "${diseaseName}" including its causes and how to treat it based on the following confidence score: ${confidenceScore}.`
+                        }
+                    ]
+                }
+            ]
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("API Response:", data);
+
+        // Remove loading text
+        document.querySelector('.loading-details').remove();
+
+        // Extract and format the details of the predicted disease
+        let diseaseDetails = data.candidates && data.candidates[0]?.content?.parts[0]?.text
+            ? data.candidates[0].content.parts[0].text
+            : "Could not retrieve disease details. Please try again.";
+
+        // Replace ** and * with HTML tags to create new lines and styling
+        diseaseDetails = diseaseDetails
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Replace **text** with <strong>text</strong>
+            .replace(/\*(.*?)\*/g, '<em>$1</em>') // Replace *text* with <em>text</em>
+            .replace(/\n/g, '<br/>'); // Ensure new lines are respected
+
+        // Create a div to hold the formatted content
+        const resultDiv = document.createElement('div');
+        resultDiv.classList.add('disease-details');
+        resultDiv.style.backgroundColor = "#f8f9fa";
+        resultDiv.style.padding = "15px";
+        resultDiv.style.marginTop = "20px";
+        resultDiv.style.borderRadius = "5px";
+        resultDiv.innerHTML = `
+            <h4>Predicted Disease Details for ${diseaseName}</h4>
+            <p>${diseaseDetails}</p>
+        `;
+
+        // Append the formatted disease details below the button
+        document.getElementById('prediction-result').appendChild(resultDiv);
+    })
+    .catch(error => {
+        console.error("Error:", error);
+
+        // Remove loading text in case of an error
+        document.querySelector('.loading-details').remove();
+        alert('Error fetching disease details.');
+    });
+});
+// Event listener for the 'Upload Another Image' button
+document.getElementById('UploadAnotherImage').addEventListener('click', function () {
+    // Reload the page when the button is clicked
+    window.location.reload();
+});
+
+
+    </script>
+</body>
+</html>
