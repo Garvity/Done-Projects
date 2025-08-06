@@ -1,0 +1,7 @@
+pandas
+requests
+beautifulsoup4
+schedule
+python-dotenv
+numpy
+
