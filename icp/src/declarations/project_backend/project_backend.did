@@ -1,4 +1,0 @@
-service : {
-  getCanisterId: () -> (text) query;
-  setCanisterId: (id: text) -> (text);
-}
